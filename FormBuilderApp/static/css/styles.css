@@ -1,0 +1,200 @@
+/*--------------------------------------------
+
+    CSS baseado em: srtdash - Bootstrap 4 Admin and Ui Kit
+                    Disponivel em: https://github.com/puikinsh/srtdash-admin-dashboard
+                    Acessado em: 01 de Novembro de 2020
+-----------------------------------------------------------------------------------*/
+
+
+:root {
+    --primary-color: #2e838c;
+}
+
+
+/*-------------------- Tipografia ------------------- */
+body {
+    font-size: 14px;
+    font-family: 'Lato', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Poppins', sans-serif;
+}
+
+
+p{
+    font-family: 'Lato', sans-serif;
+}
+
+/*-------------------- END Tipografia ------------------- */
+
+/*-------------------- Login ------------------- */
+*:focus {
+    outline: 0;
+}
+
+.login-area {
+    background: #F3F8FB;
+}
+
+.login-box {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    min-height: 100vh;
+}
+
+.login-box form {
+    margin: auto;
+    width: 450px;
+    max-width: 100%;
+    background: #000000;
+    border-radius: 3px;
+}
+
+.login-form-body {
+    padding: 50px;
+}
+
+.login-form-body .form-gp {
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.login-form-body .form-gp label {
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: rgba(0, 0, 0, 0.5);
+    -webkit-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+}
+
+.login-form-body  .form-gp.focused label {
+    top: -15px;
+    color: var(--primary-color);
+}
+
+.login-form-body .form-gp input {
+    width: 100%;
+    height: 30px;
+    border: none;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.form-gp input{
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.form-gp i {
+    position: absolute;
+    right: 5px;
+    bottom: 15px;
+    color: var(--primary-color);
+    font-size: 16px;
+}
+
+.submit-btn-area {
+    text-align: center;
+}
+
+.submit-btn-area button {
+    width: 100%;
+    height: 50px;
+    border: none;
+    background: transparent;
+    color: #585b5f;
+    border-radius: 40px;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    font-weight: 600;
+    font-size: 12px;
+    box-shadow: 0 0 22px rgba(0, 0, 0, 0.1);
+    -webkit-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+}
+
+.submit-btn-area button:hover {
+    background: var(--primary-color);
+    color: #ffffff;
+}
+
+.submit-btn-area button i {
+    margin-left: 15px;
+    -webkit-transition: margin-left 0.3s ease 0s;
+    transition: margin-left 0.3s ease 0s;
+}
+
+.submit-btn-area button:hover i {
+    margin-left: 20px;
+}
+
+.login-area {
+    background: #fff;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.login-area:before,
+.login-area:after
+{
+    content: '';
+    position: absolute;
+    height: 200%;
+    width: 100%;
+    background: transparent;
+    border-radius: 50%;
+    z-index: -1;
+    top: -50%;
+    box-shadow: inset 0 0 51px rgba( 46, 131, 140, 1);
+}
+
+.login-area:before {
+    left: -80%;
+}
+.login-area:after {
+    right: -80%;
+}
+
+.login-area .login-box form .login-form-head,
+.login-area .login-box form .form-gp input {
+    background: transparent;
+}
+
+.login-area .login-box form {
+    background: #F3F8FB;
+    border-radius: 50px;
+    box-shadow: 0 0 22px rgba(0, 0, 0, 0.2);
+}
+
+.login-area .login-box form .login-form-head {
+    text-align: center;
+    background: var(--primary-color);
+    padding: 50px;
+    border-radius: 50px;
+}
+
+.login-area .login-box form .login-form-head h4 {
+    letter-spacing: 0;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 7px;
+}
+
+.login-area .login-box form .login-form-head p {
+    font-size: 14px;
+    line-height: 22px;
+}
+
+.login-area .login-box form .login-form-head h4,
+.login-area .login-box form .login-form-head p{
+    color: #ffffff;
+}
+
+/*-------------------- END Login ------------------- */
