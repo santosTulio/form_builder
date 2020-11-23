@@ -28,3 +28,7 @@ class QuestaoUploadAdmin(admin.ModelAdmin):
 @admin.register(QuestaoTempo)
 class QuestaoTempoAdmin(admin.ModelAdmin):
     pass
+
+@admin.register(Questionario)
+class QuestionarioAdmin(admin.ModelAdmin):
+    pass

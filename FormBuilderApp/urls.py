@@ -15,9 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from FormBuilderApp.views import Login
+from .views import *
 
 urlpatterns = [
-    path('', include(('FormBuilderApp.urls', 'FormBuilderApp'), namespace='formbuilder')),
-    path('admin/', admin.site.urls, name='admin'),
+
+    path('', include('django.contrib.auth.urls')),
+    path('', Dashboard.as_view(),name='dashboard'),
+    path('myforms/', MeusFormularioView.as_view(),name='meus-formularios'),
+    path('createforms/<int:pk>', FormBuilder.as_view(),name='criar-formulario'),
 ]
