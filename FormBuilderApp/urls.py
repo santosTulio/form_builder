@@ -21,6 +21,9 @@ urlpatterns = [
 
     path('', include('django.contrib.auth.urls')),
     path('', Dashboard.as_view(),name='dashboard'),
-    path('myforms/', MeusFormularioView.as_view(),name='meus-formularios'),
-    path('createforms/<int:pk>', FormBuilder.as_view(),name='criar-formulario'),
+    path('myforms/', MeusFormularioView.as_view(),name='meus_formularios'),
+
+    path('createforms/', PerguntaView.as_view(), name='criar_formulario'),
+    path('form/<int:pk>/questions', PerguntaView.as_view(), name='formulario-perguntas'),
+    path('form/<int:pk>/answer', RespostaView.as_view(), name='formulario-respostas'),
 ]

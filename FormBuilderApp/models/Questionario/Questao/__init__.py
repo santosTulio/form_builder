@@ -3,14 +3,9 @@ from django.db import models
 from FormBuilderApp.models.Questionario.TipoArquivo import TipoArquivo
 
 
-tipoUpload =[
-    "Arquivo"
-]
 tipoTexto=[
     "Resposta Curta",
     "Resposta Longa",
-    "Email",
-    "URL"
 ]
 tipoEscolha=[
     "Lista Suspensa",
@@ -20,14 +15,8 @@ tipoNumero=[
     "Decimal",
     "Inteiro",
 ]
-tipoTempo=[
-    "Horário",
-    "Duração",
-    "Data",
-    "Data/Tempo",
-]
 
-tipos =[*tipoUpload,*tipoTexto,*tipoTempo,*tipoEscolha,*tipoNumero]
+tipos =[*tipoTexto,*tipoEscolha,*tipoNumero]
 
 class Questao(models.Model):
     secao = models.ForeignKey("Secao",on_delete=models.SET_NULL,null=True)
@@ -63,13 +52,6 @@ class QuestaoTexto(Questao):
         verbose_name = "Questão Texto"
         verbose_name_plural = "Questões Texto"
 
-#------------------------ Upload ------------------------#
-
-class QuestaoUpload(Questao):
-    tipoCampo = models.CharField("Tipo de Campo", max_length=100, choices=[(i,i) for i in tipoUpload])
-    # TipoArquivo
-    tipoArquivo = models.ManyToManyField(TipoArquivo, verbose_name="Tipo de Arquivos", blank=True)
-
 #------------------------ Escolha ------------------------#
 
 class QuestaoEscolha(Questao):
@@ -89,19 +71,3 @@ class QuestaoNumero(Questao):
     #Numero
     numeroMinimo = models.FloatField("Numero Minimo",null=True,blank=True)
     numeroMaximo = models.FloatField("Numero Máximo",null=True,blank=True)
-
-#------------------------ Tempo/Data ------------------------#
-class QuestaoTempo(Questao):
-    tipoCampo = models.CharField("Tipo de Campo", max_length=100, choices=[(i,i) for i in tipoTempo])
-
-    #Horário
-    horarioMinimo = models.TimeField("Horário Minimo",null=True)
-    horarioMaximo = models.TimeField("Horário Máximo",null=True)
-
-    #Duração
-    duracaoMinima = models.DurationField("Duração Minima",null=True)
-    duracaoMaxima = models.DurationField("Duração Máxima",null=True)
-
-    #Data - Tempo
-    dataTempoMinima = models.DateTimeField("Data/Tempo Minima",null=True)
-    dataTempoMaxima = models.DateTimeField("Data/Tempo Máxima",null=True)

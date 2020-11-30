@@ -1,6 +1,5 @@
 from django.db import models
 
-from FormBuilderApp.models.Questionario.Questao.QuestaoEscolha import Alternativa
 from FormBuilderApp.models.Questionario.Resposta import Resposta
 
 

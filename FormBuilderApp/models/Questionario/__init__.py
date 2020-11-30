@@ -1,8 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-from .Resposta import Resposta
-
 
 class Questionario(models.Model):
     titulo = models.CharField("Titulo", max_length=100)
@@ -36,9 +34,10 @@ class Questionario(models.Model):
         qsResposta = Resposta.objects.filter(questionario = self)
 
     def save(self,*args,**kwargs):
-        if self.titulo is None and self.criador:
+        if (self.titulo is None or self.titulo=='') and self.criador:
             count=Questionario.objects.filter(criador=self.criador).count()+1
             self.titulo = f"Questionário {count}"
+        print(self.titulo)
         return super(Questionario, self).save(*args,**kwargs)
 
 
@@ -48,3 +47,5 @@ class Questionario(models.Model):
 from .Secao import *
 from .TipoArquivo import *
 from .Questao import *
+
+from .Resposta import *

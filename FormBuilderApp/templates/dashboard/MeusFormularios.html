@@ -14,7 +14,7 @@
 
                     <!-- Content Row -->
                     <div class="row">
-                        <a class="col-xl-3 col-md-6 mb-4 text-decoration-none" href="#">
+                        <a class="col-xl-3 col-md-6 mb-4 text-decoration-none" href="{% url 'formbuilder:criar_formulario' %}">
                             <div class="card shadow bg-info py-2 m-0 h-100">
                                 <div class="card-body py-2">
                                     <div class="row no-gutters align-items-center">
@@ -29,7 +29,7 @@
                             </div>
                         </a>
                         {% for questionario in questionarios %}
-                        <a class="col-xl-3 col-md-6 mb-4 text-decoration-none" href="#">
+                        <a class="col-xl-3 col-md-6 mb-4 text-decoration-none" href="{% url 'formbuilder:formulario-perguntas' pk=questionario.pk%}">
                             <div class="card border-left-primary shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">

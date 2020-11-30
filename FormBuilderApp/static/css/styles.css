@@ -7,7 +7,27 @@
 
 
 :root {
-    --primary-color: #2e838c;
+      --blue: #4e73df;
+  --indigo: #6610f2;
+  --purple: #6f42c1;
+  --pink: #e83e8c;
+  --red: #e74a3b;
+  --orange: #fd7e14;
+  --yellow: #f6c23e;
+  --green: #1cc88a;
+  --teal: #20c9a6;
+  --cyan: #36b9cc;
+  --white: #fff;
+  --gray: #858796;
+  --gray-dark: #5a5c69;
+    --primary: #2e838c;
+  --secondary: #858796;
+  --success: #1cc88a;
+  --info: #36b9cc;
+  --warning: #f6c23e;
+  --danger: #e74a3b;
+  --light: #f8f9fc;
+  --dark: #5a5c69;
 }
 
 
@@ -82,7 +102,7 @@ p{
 
 .login-form-body  .form-gp.focused label {
     top: -15px;
-    color: var(--primary-color);
+    color: var(--primary);
 }
 
 .login-form-body .form-gp input {
@@ -100,7 +120,7 @@ p{
     position: absolute;
     right: 5px;
     bottom: 15px;
-    color: var(--primary-color);
+    color: var(--primary);
     font-size: 16px;
 }
 
@@ -125,7 +145,7 @@ p{
 }
 
 .submit-btn-area button:hover {
-    background: var(--primary-color);
+    background: var(--primary);
     color: #ffffff;
 }
 
@@ -180,7 +200,7 @@ p{
 
 .login-area .login-box form .login-form-head {
     text-align: center;
-    background: var(--primary-color);
+    background: var(--primary);
     padding: 50px;
     border-radius: 50px;
 }
@@ -203,3 +223,76 @@ p{
 }
 
 /*-------------------- END Login ------------------- */
+
+
+.questionario h3.titulo{
+    margin-top: min(5%, 10px);
+}
+
+
+
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  width: 40px;
+  height: 20px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(20px);
+  -ms-transform: translateX(20px);
+  transform: translateX(20px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+
+
+

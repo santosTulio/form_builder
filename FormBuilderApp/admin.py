@@ -21,13 +21,6 @@ class TipoArquivoAdmin(admin.ModelAdmin):
 class QuestaoAlternativaAdmin(admin.ModelAdmin):
     pass
 
-@admin.register(QuestaoUpload)
-class QuestaoUploadAdmin(admin.ModelAdmin):
-    pass
-
-@admin.register(QuestaoTempo)
-class QuestaoTempoAdmin(admin.ModelAdmin):
-    pass
 
 @admin.register(Questionario)
 class QuestionarioAdmin(admin.ModelAdmin):
