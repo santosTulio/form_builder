@@ -3,7 +3,8 @@ from django.db import models
 from FormBuilderApp.models.Questionario.Resposta import Resposta
 
 
-class RespostaEscolha(Resposta):
+class RespostaEscolha(models.Model):
+    resposta = models.OneToOneField(Resposta,on_delete=models.CASCADE)
 
     opcoes = models.ManyToManyField('Alternativa')
 

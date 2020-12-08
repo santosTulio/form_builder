@@ -11,16 +11,13 @@ class QuestaoTextoInline(admin.StackedInline):
 
 @admin.register(Questao)
 class QuestaoAdmin(admin.ModelAdmin):
-    inlines = [QuestaoNumeroInline,QuestaoTextoInline]
     pass
-@admin.register(TipoArquivo)
-class TipoArquivoAdmin(admin.ModelAdmin):
+@admin.register(QuestaoNumero)
+class QuestaoNumeroAdmin(admin.ModelAdmin):
     pass
-
-@admin.register(QuestaoEscolha)
-class QuestaoAlternativaAdmin(admin.ModelAdmin):
+@admin.register(Secao)
+class SecaoAdmin(admin.ModelAdmin):
     pass
-
 
 @admin.register(Questionario)
 class QuestionarioAdmin(admin.ModelAdmin):

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'FormBuilderApp.apps.FormbuilderappConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -132,3 +133,8 @@ MEDIA_ROOT = normpath(join(BASE_DIR, 'media'))
 LOGIN_URL = '/login'
 LOGIN_REDIRECT_URL = '/' #Por padrao
 
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        #'rest_framework.permissions.IsAuthenticated',
+    ]
+}

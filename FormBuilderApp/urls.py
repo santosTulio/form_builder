@@ -16,7 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from .views import *
-
+#from .views.FormBuilder.API.View.QuestaoAPI import CreateQuestaoNumeroView
+from .views.FormBuilder.API.View import *
 urlpatterns = [
 
     path('', include('django.contrib.auth.urls')),
@@ -26,4 +27,17 @@ urlpatterns = [
     path('createforms/', PerguntaView.as_view(), name='criar_formulario'),
     path('form/<int:pk>/questions', PerguntaView.as_view(), name='formulario-perguntas'),
     path('form/<int:pk>/answer', RespostaView.as_view(), name='formulario-respostas'),
+
+    path('form/<int:questionario>/questions/add/section/', SecaoAPIAdd.as_view(), name='questao-api'),
+    path('form/<int:questionario>/questions/update/section/<int:pk>', SecaoAPIAdd.as_view(), name='questao-api'),
+    path('form/<int:questionario>/questions/delete/section/<int:pk>', SecaoAPIAdd.as_view(), name='questao-api'),
+
+    path('form/<int:questionario>/questions/add/question/', QuestaoAPI.as_view(), name='questao-api'),
+    #path('form/<int:questionario>/questions/add/question/text', QuestaoAPI.as_view(), name='questao-api'),
+    #path('form/<int:questionario>/questions/add/question/<int:secao>/choices', QuestaoAPI.as_view(), name='questao-api'),
+    path('form/<int:questionario>/questions/update/question/<int:secao>/<int:questao>', QuestaoAPI.as_view(), name='questao-api'),
+    path('form/<int:questionario>/questions/update/question/<int:secao>/<int:questao>', QuestaoAPI.as_view(), name='questao-api'),
+    path('form/<int:questionario>/questions/update/question/<int:secao>/<int:questao>', QuestaoAPI.as_view(), name='questao-api'),
+    path('form/<int:questionario>/questions/delete/question/<int:secao>/<int:questao>', QuestaoAPI.as_view(), name='questao-api'),
+
 ]

@@ -24,10 +24,14 @@
   --white: #fff;
   --gray: #858796;
   --gray-dark: #5a5c69;
-  --primary: #4e73df;
+  --primary: #32838c;
+  --primary-hover: #2e7885;
+  --primary-text:#ffffff;
   --secondary: #858796;
   --success: #1cc88a;
   --info: #36b9cc;
+  --info-hover:#2a96a5;
+  --info-text:#ffffff;
   --warning: #f6c23e;
   --danger: #e74a3b;
   --light: #f8f9fc;
@@ -2347,35 +2351,35 @@ fieldset:disabled a.btn {
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #4e73df;
-  border-color: #4e73df;
+  color: var(--primary-text) !important;
+  background-color: var(--primary);
+  border-color: var(--primary);
 }
 
 .btn-primary:hover {
   color: #fff;
-  background-color: #2e59d9;
-  border-color: #2653d4;
+  background-color: var(--primary-hover);
+  border-color: var(--primary-hover);
 }
 
 .btn-primary:focus, .btn-primary.focus {
   color: #fff;
-  background-color: #2e59d9;
-  border-color: #2653d4;
+  background-color: var(--primary-hover);
+  border-color: var(--primary-hover);
   box-shadow: 0 0 0 0.2rem rgba(105, 136, 228, 0.5);
 }
 
 .btn-primary.disabled, .btn-primary:disabled {
   color: #fff;
-  background-color: #4e73df;
-  border-color: #4e73df;
+  background-color: var(--primary-hover);
+  border-color: var(--primary-hover);
 }
 
 .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,
 .show > .btn-primary.dropdown-toggle {
   color: #fff;
-  background-color: #2653d4;
-  border-color: #244ec9;
+  background-color: var(--primary);
+  border-color:var(--primary);
 }
 
 .btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,
@@ -2458,21 +2462,21 @@ fieldset:disabled a.btn {
 }
 
 .btn-info {
-  color: #fff;
-  background-color: #36b9cc;
-  border-color: #36b9cc;
+  color: var(--info-text);
+  background-color: var(--info);
+  border-color: var(--info);
 }
 
 .btn-info:hover {
-  color: #fff;
-  background-color: #2c9faf;
-  border-color: #2a96a5;
+  color: var(--info-text);
+  background-color: var(--info-hover);
+  border-color: var(--info-hover);
 }
 
 .btn-info:focus, .btn-info.focus {
-  color: #fff;
-  background-color: #2c9faf;
-  border-color: #2a96a5;
+  color: var(--info-text);
+  background-color: var(--info-hover);
+  border-color: var(--info-hover);
   box-shadow: 0 0 0 0.2rem rgba(84, 196, 212, 0.5);
 }
 
@@ -2643,22 +2647,22 @@ fieldset:disabled a.btn {
 }
 
 .btn-outline-primary {
-  color: #4e73df;
-  border-color: #4e73df;
+  color: var(--primary);
+  border-color: var(--primary);
 }
 
 .btn-outline-primary:hover {
   color: #fff;
-  background-color: #4e73df;
-  border-color: #4e73df;
+  background-color: var(--primary-hover);
+  border-color: var(--primary-hover);
 }
 
 .btn-outline-primary:focus, .btn-outline-primary.focus {
-  box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(var(--primary-hover), 0.5);
 }
 
 .btn-outline-primary.disabled, .btn-outline-primary:disabled {
-  color: #4e73df;
+  color: var(--primary-hover);
   background-color: transparent;
 }
 
@@ -6374,13 +6378,15 @@ a.close.disabled {
 }
 
 .bg-primary {
-  background-color: #4e73df !important;
+  color: var(--primary-text) !important;
+  background-color: var(--primary) !important;
 }
 
 a.bg-primary:hover, a.bg-primary:focus,
 button.bg-primary:hover,
 button.bg-primary:focus {
-  background-color: #2653d4 !important;
+  color: var(--primary-text) !important;
+  background-color: var(--primary) !important;
 }
 
 .bg-secondary {
@@ -6400,11 +6406,11 @@ button.bg-secondary:focus {
 a.bg-success:hover, a.bg-success:focus,
 button.bg-success:hover,
 button.bg-success:focus {
-  background-color: #169b6b !important;
+  background-color: var(--success) !important;
 }
 
 .bg-info {
-  background-color: #36b9cc !important;
+  background-color: var(--info) !important;
 }
 
 a.bg-info:hover, a.bg-info:focus,
@@ -10004,19 +10010,19 @@ a:focus {
 }
 
 .border-left-primary {
-  border-left: 0.25rem solid #4e73df !important;
+  border-left: 0.25rem solid var(--primary) !important;
 }
 
 .border-bottom-primary {
-  border-bottom: 0.25rem solid #4e73df !important;
+  border-bottom: 0.25rem solid var(--primary) !important;
 }
 
 .border-left-secondary {
-  border-left: 0.25rem solid #858796 !important;
+  border-left: 0.25rem solid var(--secondary) !important;
 }
 
 .border-bottom-secondary {
-  border-bottom: 0.25rem solid #858796 !important;
+  border-bottom: 0.25rem solid var(--secondary) !important;
 }
 
 .border-left-success {

@@ -3,7 +3,9 @@ from django.db import models
 from FormBuilderApp.models.Questionario.Resposta import Resposta
 
 
-class RespostaNumero(Resposta):
+class RespostaNumero(models.Model):
+    resposta = models.OneToOneField(Resposta,on_delete=models.CASCADE)
+
     numero = models.FloatField("Numero")
 
     class Meta:

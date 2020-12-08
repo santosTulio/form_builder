@@ -230,6 +230,45 @@ p{
 }
 
 
+.card-builder .hidden{
+    display: none;
+}
+.card-builder.display .hidden{
+    display: unset;
+}
+
+
+.card-builder.display .show{
+    display: none;
+}
+
+
+.floating-label label {
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: rgba(0, 0, 0, 0.5);
+    -webkit-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+}
+
+.floating-label.focused label{
+    top: -15px;
+    color: var(--primary);
+}
+
+.floating-label input,
+.floating-label textarea
+{
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+
+
+
+
 
 /* The switch - the box around the slider */
 .switch {
@@ -253,7 +292,7 @@ p{
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  background-color: var(--gray);
   -webkit-transition: .4s;
   transition: .4s;
 }
@@ -271,11 +310,11 @@ p{
 }
 
 input:checked + .slider {
-  background-color: #2196F3;
+  background-color: var(--primary);
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
+  box-shadow: 0 0 1px var(--primary);
 }
 
 input:checked + .slider:before {
@@ -292,7 +331,3 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
-
-
-
-

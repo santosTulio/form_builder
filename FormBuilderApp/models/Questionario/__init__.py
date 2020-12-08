@@ -44,8 +44,7 @@ class Questionario(models.Model):
 
 
 
-from .Secao import *
-from .TipoArquivo import *
+from .Secao import Secao
 from .Questao import *
 
 from .Resposta import *
