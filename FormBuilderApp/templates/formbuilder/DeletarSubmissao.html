@@ -1,0 +1,61 @@
+{% extends 'formbuilder/Respostas.html' %}
+
+{% block title %}Deletar Submissão de {{ formulario.titulo }}{% endblock %}
+
+{% block container %}
+     <div class="row d-flex flex-row justify-content-center">
+        <div class="card card-body col-11 col-md-8 col-lg-9 shadow mt-4 rounded" >
+            <div class="card-body rounded ">
+                <div class="no-gutters align-items-center p-2">
+                    <div class="mr-2 ">
+                            <div class="form-group">
+                                <h2 class="font-weight-bold">{{ formulario.titulo }}</h2>
+                            </div>
+                        {% if formulario.descricao %}
+                            <div class="form-group input-data">
+                                <span>{{ formulario.descricao }}</span>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        <div class="card card-body shadow">
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <span>Tem certeza que você quer deletar a Submissão de {{submissao.proprietarioResposta.first_name}} {{submissao.proprietarioResposta.last_name}}?</span>
+            </div>
+            <div class="mt-2">
+            <button class="btn btn-success" type="submit"><i class="ti-check"></i> Sim</button>
+            <a class="btn btn-danger" href="{% url 'formbuilder:listar-submissao' slug=formulario.slug%}"><i class="ti-close"></i> Não</a>
+            </div>
+        </form>
+    </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block script %}
+    	<!-- Page level plugins -->
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Custom scripts for all pages
+    <script src="js/sb-admin-2.min.js"></script>-->
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#lista-submissoes').DataTable( {
+				"language": {
+					"lengthMenu": "Mostrar _MENU_ submissões por páginas",
+					"zeroRecords": "Sem registro de submissões",
+					"info": "Exibindo _PAGE_ de _PAGES_",
+					"infoEmpty": "Sem submissões com tal parametro",
+					"infoFiltered": "(Filtrado de _MAX_ registros totais)",
+					"previous":"Anterior",
+					"next":"Próxima"
+				}
+			}
+    	);
+		} );
+	</script>
+{% endblock %}

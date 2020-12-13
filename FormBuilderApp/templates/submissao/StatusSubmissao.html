@@ -1,0 +1,88 @@
+{% extends 'dashboard/index.html' %}
+
+{% block title %}{{ formulario.titulo }}{% endblock %}
+{% load tz %}
+{% block navbar %}
+{% endblock %}
+{% block container %}
+    <div class="row d-flex flex-row mt-4 justify-content-center">
+        <div class="card card-body col-11 col-md-8 col-lg-9 shadow rounded" >
+            <div class="card-body rounded">
+                <div class="no-gutters align-items-center">
+                    <div class="mr-2 ">
+                                <h2 class="font-weight-bold">{{ formulario.titulo }}</h2>
+                        {% if formulario.descricao %}
+                            <div class="form-group input-data">
+                                <span>{{ formulario.descricao }}</span>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% if status == "ACCEPT" %}
+            <div class="card-body rounded pt-0">
+                <div class="no-gutters align-items-center p-2">
+                    <div class="mr-2">
+                        <div class="d-flex flex-row justify-content-between">
+                            <div >
+                                <h3>Obrigado(a) {{ submissao.proprietarioResposta.first_name }}</h3>
+                                <h6>{{ submissao.formulario.mensagemAgradecimento}}</h6>
+                                <span>Sua resposta foi submetida com sucesso em {{ submissao.dataCriacao }}</span>
+                            </div>
+                            <i class="fas fa-check text-success fa-5x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% elif status == "ERROR"%}
+                <div class="card-body rounded pt-0">
+                <div class="no-gutters align-items-center p-2">
+                    <div class="mr-2 ">
+                        <div class="d-flex flex-row justify-content-between">
+                            <div >
+                                <h3>Olá {{ user.first_name }}!!</h3>
+                                <h6>Houve algum erro ao submeter sua resposta</h6>
+                                <h6> Por favor responda novamente o questionario "<a href="{{ redirectTo }}" class="text-primary">{{ formulario }}</a>"</h6>
+                                <span> Caso o problema persistir entre em contato com o administrador do sistema o mais breve possivel pelo email <a href="mailto:getulio.santos@uft.edu.br" class="text-primary">getulio.santos@uft.edu.br</a></span>
+                            </div>
+                            <i class="fas fa-times text-danger fa-5x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% elif status == "NOT_ACCEPTING"%}
+                <div class="card-body rounded pt-0">
+                <div class="no-gutters align-items-center p-2">
+                    <div class="mr-2 ">
+                        <div class="d-flex flex-row justify-content-between">
+                            <div >
+                                <h3>Olá {{ user.first_name }}!!</h3>
+                                <h6>Este formulario não está aberto para submissão:</h6>
+                                <h6>- Ou por não possuir perguntas em tal.</h6>
+                                <h6>- Ou por simplementente não aceitar respostas ainda.</h6>
+                            </div>
+                            <i class="fas fa-exclamation-triangle text-warning fa-5x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% elif status == "ALREADY_ANSWERED"%}
+                <div class="card-body rounded pt-0">
+                <div class="no-gutters align-items-center p-2">
+                    <div class="mr-2 ">
+                        <div class="d-flex flex-row justify-content-between">
+                            <div >
+                                <h3>Olá {{ user.first_name }}!!</h3>
+                                <h6>Você já submeteu as respostas para esse formulario, e no momento ele aceita somente uma submissão por usuario</h6>
+                            </div>
+                            <i class="fas fa-exclamation-triangle text-warning fa-5x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           {% endif %}
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+{% endblock %}

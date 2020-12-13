@@ -1,0 +1,122 @@
+{% extends 'dashboard/index.html' %}
+
+{% block title %}{{ formulario.titulo }}{% endblock %}
+{% load static %}
+{% load tz %}
+    {% block style %}
+        <link href="{%  static 'formbuilder/css/icheck-material.min.css'%}" rel="stylesheet" type="text/css">
+    {% endblock %}
+{% block navbar %}
+{% endblock %}
+{% block container %}
+    <div class="row d-flex flex-row justify-content-center">
+        <div class="card card-body col-11 col-md-8 col-lg-9 shadow mt-4 rounded" >
+            <div class="card-body rounded ">
+                <div class="no-gutters align-items-center p-2">
+                    <div class="mr-2 ">
+                            <div class="form-group">
+                                <h2 class="font-weight-bold">{{ formulario.titulo }}</h2>
+                            </div>
+                        {% if formulario.descricao %}
+                            <div class="form-group input-data">
+                                <span>{{ formulario.descricao }}</span>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <form action="{% url 'formbuilder:submissao' slug=formulario.slug %}" method="POST" autocomplete="off">
+            {% csrf_token %}
+            <div id="wizard" class="px-5 px-sm-1">
+            {% for secao in formulario.secao_set.all %}
+                <div class="section-wizard">
+                {% if secao.titulo or secao.descricao %}
+                    <div class="card-body border-bottom-primary border-left-primary rounded shadow">
+                        <div class="no-gutters align-items-center p-2">
+                            <div class="mr-2 ">
+                                    {% if  secao.titulo%}
+                                    <div class="form-group">
+                                        <h4>{{ secao.titulo }}</h4>
+                                    </div>
+                                    {% endif %}
+                                    {% if  secao.descricao%}
+                                    <div class="form-group">
+                                        <span>{{ secao.descricao }}</span>
+                                    </div>
+                                    {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+                {% for questao in secao.questao_set.all %}
+                    <div class="card card-body bg-white shadow my-2 rounded">
+                        <div class="form-group flex-row">
+                            <h5>{{ questao.pergunta }}{% if questao.obrigatorio %}<span style="color: red">*</span>{% endif %}</h5>
+                        </div>
+                        {% if questao.subTipoCampo == 6 %}
+                            <div class="form-group flex-row">
+                                <input type="number" name="{{ questao.slug }}" {% if questao.obrigatorio %}required{% endif %} max="{{ questao.numeroMaximo }}" min="{{ questao.numeroMinimo }}" class="form-control" placeholder="{{ questao.placeholder }}">
+                            </div>
+                        {% elif questao.subTipoCampo == 5 %}
+                            <div class="form-group flex-row">
+                                <input type="number" name="{{ questao.slug }}" {% if questao.obrigatorio %}required{% endif %} max="{{ questao.numeroMaximo }}" min="{{ questao.numeroMinimo }}" step="0.5" class="form-control" placeholder="{{ questao.placeholder }}">
+                            </div>
+                        {% elif questao.subTipoCampo == 1 %}
+                            <div class="form-group flex-row">
+                                <input type="text" name="{{ questao.slug }}" {% if questao.obrigatorio %}required{% endif %} class="form-control" placeholder="{{ questao.placeholder }}">
+                            </div>
+                        {% elif questao.subTipoCampo == 2 %}
+                            <div class="form-group flex-row">
+                                <textarea name="{{ questao.slug }}" {% if questao.obrigatorio %}required{% endif %} class="form-control" placeholder="{{ questao.placeholder }}"></textarea>
+                            </div>
+                        {% elif questao.subTipoCampo == 3 %}
+                            <div class="form-group">
+                            <select class="form-control" name="{{ questao.slug }}">
+                                    {% for alternativa in questao.alternativa_set.all %}
+                                        <option value="{{ alternativa.slug}}">{{ alternativa.rotulo}}</option>
+                                    {% endfor %}
+                            </select>
+                            </div>
+                        {% elif questao.subTipoCampo == 4 and questao.multiplas%}
+                            <div class="form-group">
+                                {% for alternativa in questao.alternativa_set.all %}
+                                    <div class="icheck-material-green">
+                                          <input type="checkbox" id="{{ alternativa.slug }}" name="{{ alternativa.slug }}" value="{{ alternativa.slug }}"/>
+                                          <label class="h6" for="{{ alternativa.slug }}">{{ alternativa.rotulo }}</label>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% elif questao.subTipoCampo == 4%}
+                            <div class="form-group">
+                                {% for alternativa in questao.alternativa_set.all %}
+                                    <div class="icheck-material-green">
+                                          <input type="radio" {% if questao.obrigatorio %}required{% endif %} id="{{ alternativa.slug }}" name="{{ questao.slug }}" value="{{ alternativa.slug }}"/>
+                                          <label class="h6" for="{{ alternativa.slug }}">{{ alternativa.rotulo }}</label>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                </div>
+            {% endfor %}
+            </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+{% block scroll-to-top %}
+{% endblock %}
+{% block script %}
+    {% csrf_token %}
+    <script type="text/javascript" src="http://hacks.bluesmoon.info/strftime/strftime-min.js"></script>
+
+
+    <script src="{% static 'formbuilder/js/form/wizard.js'%}"></script>
+    <script type="text/javascript">
+        $('#wizard').wizard()
+        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        const urlapi = '/api/form/{{ formulario.pk }}/questions/'
+    </script>
+    <!--<script src="{% static 'formbuilder/js/form/scripts.js'%}"></script>-->
+{% endblock %}

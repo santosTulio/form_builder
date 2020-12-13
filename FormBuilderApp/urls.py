@@ -1,43 +1,49 @@
-"""FormBuilder URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/3.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
-from django.contrib import admin
 from django.urls import path, include
-from .views import *
-#from .views.FormBuilder.API.View.QuestaoAPI import CreateQuestaoNumeroView
-from .views.FormBuilder.API.View import *
+
+from .views.FormBuilder.FormularioView import FormularioDeleteRedirectView
+from .views.FormBuilder.FormularioView import FormularioSubmissaoViewer
+from .views.FormBuilder.SubmissaoView import SubmissaoListView, SubmissaoDeleteView
+from .views.FormBuilder.SubmissaoView import SubmissaoCreateView
+from .views.FormBuilder.FormularioView import ConstrutorDeFormularioView
+from .views.Dashboard.Dashboard import Dashboard
+
+from FormBuilderApp.views.API.View.FormularioAPI import FormularioAPI
+from FormBuilderApp.views.API.View.QuestaoAPI import QuestaoAPI
+from FormBuilderApp.views.API.View.SecaoAPI import SecaoAPI
+from FormBuilderApp.views.API.View.AlternativaAPI import AlternativaAPI
+
 urlpatterns = [
 
     path('', include('django.contrib.auth.urls')),
     path('', Dashboard.as_view(),name='dashboard'),
-    path('myforms/', MeusFormularioView.as_view(),name='meus_formularios'),
 
-    path('createforms/', PerguntaView.as_view(), name='criar_formulario'),
-    path('form/<int:pk>/questions', PerguntaView.as_view(), name='formulario-perguntas'),
-    path('form/<int:pk>/answer', RespostaView.as_view(), name='formulario-respostas'),
+    path('createforms/', ConstrutorDeFormularioView.as_view(), name='criar_formulario'),
+    path('form/<int:pk>', ConstrutorDeFormularioView.as_view(), name='editar-formulario'),
+    path('form/<slug>/view', FormularioSubmissaoViewer.as_view(), name='ver-formulario'),
+    path('form/<int:pk>/deletar', FormularioDeleteRedirectView.as_view(), name='deletar-formulario'),
+    path('form/<slug>/answer', SubmissaoListView.as_view(), name='listar-submissao'),
+    path('form/<slug>/answer/<int:pk>/delete', SubmissaoDeleteView.as_view(), name='deletar-submissao'),
+    #path('form/<slug>/answer/exportar-csv', some_streaming_csv_view, name='exportar-respostas'),
 
-    path('form/<int:questionario>/questions/add/section/', SecaoAPIAdd.as_view(), name='questao-api'),
-    path('form/<int:questionario>/questions/update/section/<int:pk>', SecaoAPIAdd.as_view(), name='questao-api'),
-    path('form/<int:questionario>/questions/delete/section/<int:pk>', SecaoAPIAdd.as_view(), name='questao-api'),
+    path('submissao/<slug>', SubmissaoCreateView.as_view(), name='submissao'),
 
-    path('form/<int:questionario>/questions/add/question/', QuestaoAPI.as_view(), name='questao-api'),
+    path('api/form/<int:pk>/questions/', FormularioAPI.as_view(), name='api-update-formulario'),
+    #path('<int:pk>/questions', FormularioView.as_view(), name='formulario'),
+
+    path('api/form/<int:formulario>/questions/section/', SecaoAPI.as_view(), name='api-add-secao'),
+    path('api/form/<int:formulario>/questions/section/<int:pk>', SecaoAPI.as_view(), name='api-update-delete-secao'),
+
+    path('api/form/<int:formulario>/questions/question/', QuestaoAPI.as_view(), name='api-add-questao'),
+    path('api/form/<int:formulario>/questions/question/<int:pk>', QuestaoAPI.as_view(), name='api-update-delete-questao'),
+    path('api/form/<int:formulario>/questions/question/<int:questao>/choice/', AlternativaAPI.as_view(), name='api-add-alternativa'),
+    path('api/form/<int:formulario>/questions/question/<int:questao>/choice/<int:pk>', AlternativaAPI.as_view(), name='api-update-delete-alternativa'),
+
+
     #path('form/<int:questionario>/questions/add/question/text', QuestaoAPI.as_view(), name='questao-api'),
     #path('form/<int:questionario>/questions/add/question/<int:secao>/choices', QuestaoAPI.as_view(), name='questao-api'),
-    path('form/<int:questionario>/questions/update/question/<int:secao>/<int:questao>', QuestaoAPI.as_view(), name='questao-api'),
-    path('form/<int:questionario>/questions/update/question/<int:secao>/<int:questao>', QuestaoAPI.as_view(), name='questao-api'),
-    path('form/<int:questionario>/questions/update/question/<int:secao>/<int:questao>', QuestaoAPI.as_view(), name='questao-api'),
-    path('form/<int:questionario>/questions/delete/question/<int:secao>/<int:questao>', QuestaoAPI.as_view(), name='questao-api'),
+    #path('form/<int:questionario>/questions/update/question/<int:secao>/<int:questao>', QuestaoAPI.as_view(), name='questao-api'),
+    #path('form/<int:questionario>/questions/update/question/<int:secao>/<int:questao>', QuestaoAPI.as_view(), name='questao-api'),
+    #path('form/<int:questionario>/questions/update/question/<int:secao>/<int:questao>', QuestaoAPI.as_view(), name='questao-api'),
+    #path('form/<int:questionario>/questions/delete/question/<int:secao>/<int:questao>', QuestaoAPI.as_view(), name='questao-api'),
 
 ]

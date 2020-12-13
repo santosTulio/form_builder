@@ -1,93 +1,115 @@
-{% extends 'dashboard/index.html' %}
+{% extends 'formbuilder/BuilderForm.html' %}
+
+{% block title %}{{ formulario.titulo }}{% endblock %}
 {% load static %}
-
-{% block navbar %}
-            <!-- Topbar -->
-            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-                <div class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                    <h5 id="titulo">{{ questionario.titulo }}</h5>
-                </div>
-
-                <!-- Topbar Navbar -->
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="far fa-comment-alt"></i>
-                        </a>
-                    </li>
-
-                    <div class="topbar-divider d-none d-sm-block"></div>
-
-                    <!-- Nav Item - User Information -->
-                    <li class="nav-item dropdown no-arrow">
-                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ user.first_name }}</span>
-                            <img class="img-profile rounded-circle"
-                                src="{% static 'img/undraw_profile.svg' %}">
-                        </a>
-                        <!-- Dropdown - User Information -->
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                            aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Sair
-                            </a>
-                        </div>
-                    </li>
-
-                </ul>
-
-            </nav>
-            <!-- End of Topbar -->
-{% endblock %}
+{% block style %}
+    <link href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+{% endblock  %}
 {% block container %}
-    <div class="card mx-auto w-75">
-        <div class="card-header m-0 p-0">
-            <ul class="nav nav-tabs nav-justified">
-              <li class="nav-item">
-                <a class="nav-link" href="#">Perguntas</a>
-              </li>
-              <li class="nav-item ">
-                <a class="nav-link active " href="#">Respostas</a>
-              </li>
-            </ul>
-        </div>
-        <div id='main' class="card-body">
-            {% block main %}
-                <div class="jumbotron jumbotron-fluid card-deck">
-                    <div class="card border-left-primary shadow h-100 py-2">
-                        <div class="card-body">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col mr-2">
-                                    <div class="text-xs font-weight-bold text-gray-800 text-uppercase mb-1">Respostas</div>
-                                    <div class="h5 mb-0 font-weight-bold text-primary">44</div>
-                                </div>
-                                <div class="col-auto">
-                                    <i class="fas fa-comments fa-2x text-gray-300"></i>
-                                </div>
+     <div class="row d-flex flex-row justify-content-center">
+        <div class="card card-body col-11 col-md-8 col-lg-9 shadow rounded" >
+            <div class="card-body rounded ">
+                <div class="no-gutters align-items-center p-2">
+                    <div class="mr-2 ">
+                            <div class="form-group">
+                                <h2 class="font-weight-bold">{{ formulario.titulo }}</h2>
                             </div>
-                        </div>
-                    </div>
-                    <div class="card border-left-primary shadow h-100 py-2">
-                        <div class="card-body">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col mr-2">
-
-                                    <div class="text-xs font-weight-bold text-gray-800 text-uppercase mb-1">Status</div>
-                                    <div class="h5 mb-0 font-weight-bold text-primary">Ativo</div>
-                                </div>
-                                <div class="col-auto">
-                                    <i class="fas fa-check fa-2x text-gray-300"></i>
-                                </div>
+                        {% if formulario.descricao %}
+                            <div class="form-group input-data">
+                                <span class="h5">{{ formulario.descricao }}</span>
                             </div>
-                        </div>
+                        {% endif %}
                     </div>
                 </div>
-            {% endblock %}
+            </div>
+        {% if submissoes.count > 0 %}
+            <div class="row mb-4 justify-content-center">
+                 <div class="col-auto col-lg-4">
+                     <div class="card border-left-primary shadow h-100 py-2">
+                         <div class="card-body">
+                             <div class="row no-gutters align-items-center">
+                                 <div class="col mr-2">
+                                    <span class="text-xs font-weight-bold text-primary text-uppercase mb-1">Quantidades de respostas</span>
+                                    <div class="no-gutters align-items-center justify-content-center">
+                                        <h5 class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{submissoes.count}}</h5>
+                                    </div>
+                                 </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-comment fa-2x text-gray-300"></i>
+                                </div>
+                             </div>
+                                </div>
+                            </div>
+                        </div>
+             </div>
+            <div class="row justify-content-center">
+                <div class="table-responsive col-11 col-md-10">
+                <table class="table table-striped" id="lista-veiculo" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Usuario</th>
+                            <th>Email</th>
+                            <th>Data de Resposta</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for submissao in submissoes%}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{submissao.proprietarioResposta.first_name}} {{submissao.proprietarioResposta.last_name}}</td>
+                            <td>{{submissao.proprietarioResposta.email}}</td>
+                            <td>{{submissao.dataCriacao}}</td>
+                            <td>
+                                <a class="btn btn-danger" href="{% url 'formbuilder:deletar-submissao' pk=submissao.pk slug=formulario.slug%}" role="button"><i class="ti-trash"></i></a>
+                            </td>
+                        </tr>
+                    {% endfor%}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                          <td colspan="5"><a href="{% url 'formbuilder:listar-submissao' slug=formulario.slug %}?exportar=CSV" class="btn btn-primary align-content-center"><i class="fas fa-file-csv"></i> <span>Exportar</span> <span>CSV</span></a></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            </div>
+        {% else %}
+            <div class="mt-4 justify-content-center">
+                <div class="d-block text-center text-primary">
+                    <img class="img-responsive" src="{% static 'formbuilder/img/LogoFullPrimary.svg' %}"/>
+                    <h3>Ainda não há respostas para este questionário.</h3>
+                    <small class="text-gray-800">Tente compartilhá-lo com mais pessoas </small>
+                </div>
+            </div>
+        {% endif %}
         </div>
-
     </div>
+{% endblock %}
+{% block scroll-to-top %}
+{% endblock %}
+{% block script %}
+    	<!-- Page level plugins -->
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Custom scripts for all pages
+    <script src="js/sb-admin-2.min.js"></script>-->
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#lista-submissoes').DataTable( {
+				"language": {
+					"lengthMenu": "Mostrar _MENU_ submissões por páginas",
+					"zeroRecords": "Sem registro de submissões",
+					"info": "Exibindo _PAGE_ de _PAGES_",
+					"infoEmpty": "Sem submissões com tal parametro",
+					"infoFiltered": "(Filtrado de _MAX_ registros totais)",
+					"previous":"Anterior",
+					"next":"Próxima"
+				}
+			}
+    	);
+		} );
+	</script>
 {% endblock %}

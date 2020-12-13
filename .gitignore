@@ -1,3 +1,6 @@
 /venv/
-*/migrations/0*
+**/__pycache__
 /.idea/
+**/migrations/**
+!**/migrations
+!**/migrations/__init__.py

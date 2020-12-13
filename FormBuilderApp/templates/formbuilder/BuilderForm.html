@@ -1,0 +1,112 @@
+{% extends 'dashboard/index.html' %}
+{% block title %}{{ formulario.titulo }}{% endblock %}
+{% load static %}
+{% load tz %}
+{% block navbar %}
+    {% include 'formbuilder/Navbar.html' %}
+{% endblock %}
+{% block container %}
+    <div class="row d-flex flex-row justify-content-center">
+    <div class="card card-body shadow col-12 col-md-8 col-lg-9 p-1 p-lg-3 rounded mb-2" >
+        <div class="card-body rounded card-builder formulario">
+            <div class="no-gutters align-items-center p-2">
+                <div class="mr-2 ">
+                        <div class="form-group">
+                            <label class="h-3 text-xs font-weight-bold text-gray-800 text-uppercase mb-1" for="titulo">Titulo</label>
+                            <input type="text" class="form-control form-control-lg readonly-focus" id="titulo_formulario" aria-describedby="Titulo do formulario" placeholder="Titulo do Formulário" value="{{ formulario.titulo }}">
+                        </div>
+                        <div class="form-group input-data">
+                            <label class="text-xs font-weight-bold text-gray-800 text-uppercase mb-1" for="descricao">Descrição</label>
+                            <textarea type="quill" class="form-control" id="descricao_formulario">{{ formulario.descricão }}</textarea>
+                        </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="main">
+
+        </div>
+        <div class="mx-2 my-2 row">
+            <div class="bg-primary col-auto d-lg-none d-flex flex-grow-0 p-1" id="adicionarItem">
+                <div class="bg-white rounded mr-1">
+                    <button class="btn btn-outline-primary add-pergunta-opcao"><i class="far fa-dot-circle"></i> <span>Opção</span></button>
+                </div>
+                <div class="bg-white rounded mr-1">
+                    <button class="btn btn-outline-primary add-pergunta-texto"><i class="ti-text"></i> <span>Texto</span></button>
+                </div>
+                <div class="bg-white rounded mr-1">
+                    <button class="btn btn-outline-primary add-pergunta-numero"><i class="fas fa-sort-numeric-up"></i> <span>Numero</span></button>
+                </div>
+                <div class="bg-white rounded mr-1">
+                    <button class="btn btn-outline-primary add-secao"><i class="ti-layers"></i> <span>Seção</span></button>
+                </div>
+            </div>
+            <div class="bg-primary col-auto d-none d-lg-flex p-1 flex-lg-row" id="adicionarItem">
+                <button class="btn btn-primary  rounded adicionar" id="adicionar"><i class="ti-plus mx-1"></i> <span>Adicionar novo</span></button>
+                <div class="bg-white rounded mr-1 adicionar" style="display: none">
+                    <button class="btn btn-outline-primary add-pergunta-opcao"><i class="far fa-dot-circle"></i> <span>Opção</span></button>
+                </div>
+                <div class="bg-white rounded mr-1 adicionar" style="display: none">
+                    <button class="btn btn-outline-primary add-pergunta-texto"><i class="ti-text"></i> <span>Texto</span></button>
+                </div>
+                <div class="bg-white rounded mr-1 adicionar" style="display: none">
+                    <button class="btn btn-outline-primary add-pergunta-numero"><i class="ti-plus"></i> <span>Numero</span></button>
+                </div>
+                <div class="bg-white rounded mr-1 adicionar" style="display: none">
+                    <button class="btn btn-outline-primary add-secao"><i class="ti-layers"></i> <span>Seção</span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}
+{% block scroll-to-top %}
+    <div class="fixed-bottom d-flex flex-row justify-content-end mr-1 mb-1">
+    <a class="rounded btn btn-info" href="#" data-toggle="modal" data-target="#configModal">
+        <i class="fas fa-cog fa-2x my-auto mx-auto"></i>
+    </a>
+    </div>
+    <div class="modal fade" id="configModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Configurações avançadas</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex m-2">
+                        <label class="switch my-auto mr-1">
+                            <input type="checkbox" id="aceitacao" data-toggle="collapse" data-parent="#accordion-aceita" data-target="#aceita_collapse" {% if not formulario.aceitaResposta %} class="collapsed" aria-expanded="false" checked="false" {% else %} checked="true" aria-expanded="true"{% endif %}>
+                            <span class="slider round"></span>
+                        </label>
+                        <span>Aceitar resposta</span>
+                    </div>
+                    <div class="d-flex m-2">
+                        <label class="switch my-auto mr-1">
+                            <input type="checkbox" id="unicaresposta" {% if formulario.unicaResposta %} checked {% endif %}>
+                            <span class="slider round"></span>
+                        </label>
+                        <span>Unica resposta por Login</span>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="form-group m-2">
+                        <label>Mensagem Agradecimento</label>
+                        <textarea class="form-control" id='mensagemagradecimento' aria-label="Mensagem de Agradecimento">{{ formulario.mensagemAgradecimento }}</textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+    {% csrf_token %}
+
+    <script type="text/javascript">
+        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        const urlapi = "{% url 'formbuilder:api-update-formulario' pk=formulario.pk %}"
+    </script>
+
+    <script src="{% static 'formbuilder/js/form/scripts.js'%}"></script>
+{% endblock %}

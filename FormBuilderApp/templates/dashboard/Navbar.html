@@ -1,0 +1,28 @@
+{% load static %}
+            <nav class="navbar navbar-expand navbar-light bg-primary topbar mb-4 static-top shadow">
+                <a class="btn btn-lg bg-primary" href="{% url 'formbuilder:dashboard' %}">
+                   <img alt="Logo do site" class="img d-none d-lg-inline"
+                                src="{% static 'formbuilder/img/LogoFull.svg' %}"/>
+                    <img alt="Logo do site" class="img d-lg-none d-inline"
+                                src="{% static 'formbuilder/img/LogoShortWhite.svg' %}">
+                </a>
+
+                <ul class="navbar-nav ml-auto">
+                    <div class="topbar-divider d-none d-sm-block"></div>
+                    <li class="nav-item dropdown no-arrow">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="h6 mr-2 d-none d-lg-inline align-self-center text-white my-0">{{ user.first_name }}</span>
+                            <img class="img-profile rounded-circle"
+                                src="{% static 'formbuilder/img/undraw_profile.svg' %}">
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                            aria-labelledby="userDropdown">
+                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Sair
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>

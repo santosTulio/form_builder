@@ -1,5 +1,5 @@
 
-from .Questionario import *
+from .Formulario import *
 
 
 # Create your models here.
